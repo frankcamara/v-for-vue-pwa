@@ -6,7 +6,7 @@
         <md-list>
           <dialog-item
             :show-dialog.sync="showDialog"
-            :name="name"
+            :name.sync="name"
             :phone.sync="phone"
             :name-errors="nameErrors"
             :phone-errors="phoneErrors"

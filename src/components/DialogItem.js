@@ -7,12 +7,12 @@ const DialogItem = {
       <md-tab md-label="Contact">
         <md-field md-inline :class="nameErrors">
           <label>Name</label>
-          <md-input v-model="name" required></md-input>
+          <md-input @change="onNameChange" :value="name" required></md-input>
           <span class="md-error">There is an error</span>
         </md-field>
         <md-field md-number :class="phoneErrors">
           <label>Phone</label>
-          <md-input v-model="phone" type="number" required></md-input>
+          <md-input type="number" @change="onPhoneChange" :value="phone" required></md-input>
           <span class="md-error">There is an error</span>
         </md-field>
       </md-tab>
@@ -36,6 +36,12 @@ const DialogItem = {
     onCloseDialog: function() {
       console.log('Dialog closed')
       this.$emit('update:showDialog', false)
+    },
+    onNameChange(ev, name) {
+      this.$emit('update:name', ev.target.value)
+    },
+    onPhoneChange(ev, phone) {
+      this.$emit('update:phone', ev.target.value)
     }
   }
 }
