@@ -1,0 +1,3 @@
+export const GET_CONTACTS = 'GET_CONTACTS'
+export const ADD_CONTACT = 'ADD_CONTACT'
+export const ADD_CONTACT_WO_ACTION = 'ADD_CONTACT_WO_ACTION'
