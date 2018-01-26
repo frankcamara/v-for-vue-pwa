@@ -17,7 +17,7 @@
       <md-card-expand-trigger>
         <md-button class="md-primary">Learn more</md-button>
       </md-card-expand-trigger>
-      <md-button @click="addToCart"><md-icon>shopping_cart</md-icon></md-button>
+      <md-button @click="addToCart"><md-icon>add_shopping_cart</md-icon></md-button>
     </md-card-actions>
 
     <md-card-expand>
