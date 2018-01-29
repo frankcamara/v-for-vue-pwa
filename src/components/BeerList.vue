@@ -18,7 +18,6 @@ export default {
   },
   methods: {
     onAddToCart: function(beer) {
-      console.log('List add to cart', beer)
       this.$emit('onAddToCart', beer)
     }
   }

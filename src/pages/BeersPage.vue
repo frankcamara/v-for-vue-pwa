@@ -11,7 +11,7 @@ export default {
     'beer-list': () => import('../components/BeerList')
   },
   methods: {
-    ...mapActions(['getBeers', 'getRandomBeer']),
+    ...mapActions(['getBeers', 'getRandomBeer', 'addToCart']),
     fetchMore() {
       const scrollY = window.scrollY
       const visible = document.documentElement.clientHeight
@@ -28,7 +28,7 @@ export default {
       }
     },
     handleAddToCart(beer) {
-      console.log("I'm gonna add this to cart", beer)
+      this.addToCart(beer)
     }
   },
   computed: {

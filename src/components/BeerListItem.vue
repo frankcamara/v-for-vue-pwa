@@ -43,7 +43,6 @@ export default {
       return `${abv}% ALC/VOL`
     },
     addToCart() {
-      console.log('Item add to cart')
       this.$emit('addToCart', this.beer)
     }
   }

@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="page-container  md-layout-column">
-    <md-app>
+  <div id="app">
+    <md-app class="page-container">
       <md-app-toolbar class="md-primary">
         <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
           <md-icon>menu</md-icon>
@@ -42,25 +42,36 @@
         </md-toolbar>
 
         <md-list>
-          <md-list-item>
-            <span class="md-list-item-text">yada yada</span>
-
-            <md-button class="md-icon-button md-list-action">
-              <md-icon class="md-primary">remove_shopping_cart</md-icon>
-            </md-button>
-          </md-list-item>
-          <md-list-item>
-            <span class="md-list-item-text">yada yada</span>
-
-            <md-button class="md-icon-button md-list-action">
-              <md-icon class="md-primary">remove_shopping_cart</md-icon>
-            </md-button>
-          </md-list-item>
-
+          <div v-if="Object.keys(cartItems).length">
+            <md-list-item v-for="item in cartItems" :key="item.id">
+              <span class="md-list-item-text">{{item.name | truncate(10)}}</span>
+              <span class="md-list-item-text"> Qty: {{item.qtyNumber}}</span>
+              <md-button class="md-icon-button md-list-action" @click="handleRemoveFromCart(item.id)">
+                <md-icon class="md-primary">remove_shopping_cart</md-icon>
+              </md-button>
+            </md-list-item>
+            <hr>
+            <md-list-item>
+              <h4>Qty: {{getItemTotal}}</h4>
+              <h3>Total: {{getCartTotal}} EUR</h3>
+            </md-list-item>
+            <md-list-item @click="handleCheckout" class="checkout">
+              <span class="md-list-item-text">Checkout</span>
+              <md-icon>payment</md-icon>
+            </md-list-item>
+          </div>
+          <md-list-item v-else>
+          <md-empty-state
+            class="md-primary"
+            md-icon="info"
+            md-label="Nothing in Cart"
+            md-description="Try add some beer">
+          </md-empty-state>
+        </md-list-item>
         </md-list>
       </md-app-drawer>
 
-      <md-app-content>
+      <md-app-content class="page-container">
         <router-view></router-view>
       </md-app-content>
     </md-app>
@@ -68,6 +79,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
   name: 'app',
   data() {
@@ -77,31 +89,52 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['removeFromCart']),
     toggleMenu() {
       this.menuVisible = !this.menuVisible
     },
     toggleCart() {
-      console.log('toggle cart', this.cartVisible)
+      console.log('current cart', this.cartItems)
       this.cartVisible = !this.cartVisible
+    },
+    handleRemoveFromCart(id) {
+      this.removeFromCart(id)
+    },
+    handleCheckout() {
+      this.toggleCart()
+      this.$router.push('/checkout')
+    }
+  },
+  computed: {
+    ...mapState({
+      cartItems: state => state.cart.cartItems
+    }),
+    ...mapGetters(['getCartTotal', 'getItemTotal'])
+  },
+  filters: {
+    truncate(text, stop) {
+      return text.slice(0, stop) + (stop < text.length ? '...' : '')
     }
   }
 }
 </script>
 
 <style scoped>
-.page-container {
-    min-height: 300px;
-    overflow: hidden;
-    position: relative;
-    border: 1px solid rgba(#000, .12);
+  .page-container {
+    height: 100vh
   }
 
   .md-drawer {
-    width: 230px;
+    width: 250px;
     max-width: calc(100vw - 125px);
   }
 
   .md-content {
     padding: 16px;
+  }
+
+  .checkout {
+    background-color: #448aff;
+    margin-top: 40px
   }
 </style>
