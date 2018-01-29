@@ -2,7 +2,7 @@
   <div>
     <h1 v-bind:title="msgHoover">{{ msg }}</h1>
     <md-tabs md-sync-route>
-      <md-tab id="tab-contacts" md-label="Contacts" to="/list">
+      <md-tab id="tab-contacts" md-label="Favourites" to="/friends">
         <md-list>
           <dialog-item
             :show-dialog.sync="showDialog"
@@ -25,7 +25,7 @@
           </list-item>
         </md-list>
       </md-tab>
-      <md-tab id="tab-other" md-label="Other" to="/list/other">
+      <md-tab id="tab-other" md-label="All friends" to="/friends/all">
         TBD
       </md-tab>
     </md-tabs>
@@ -36,11 +36,11 @@
 import * as types from '../store/mutationTypes'
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
-const List = {
-  name: 'list',
+const FriendsPage = {
+  name: 'friendsPage',
   components: {
-    'list-item': () => import('./ListItem'),
-    'dialog-item': () => import('./DialogItem')
+    'list-item': () => import('../components/ListItem'),
+    'dialog-item': () => import('../components/DialogItem')
   },
   methods: {
     // Async mutations
@@ -95,7 +95,7 @@ const List = {
   data() {
     return {
       showDialog: false,
-      msg: 'List',
+      msg: 'My friends',
       msgHoover: 'This is cool',
       name: '',
       phone: '',
@@ -104,7 +104,7 @@ const List = {
     }
   }
 }
-export default List
+export default FriendsPage
 </script>
 
 <style>

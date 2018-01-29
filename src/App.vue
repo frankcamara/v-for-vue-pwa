@@ -29,6 +29,11 @@
             <span class="md-list-item-text">Beers</span>
           </md-list-item>
 
+          <md-list-item to="/friends">
+            <md-icon>account_circle</md-icon>
+            <span class="md-list-item-text">My Friends</span>
+          </md-list-item>
+
           <md-list-item to="/about">
             <md-icon>info</md-icon>
             <span class="md-list-item-text">About</span>

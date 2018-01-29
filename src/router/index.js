@@ -5,7 +5,8 @@ import Beers from '@/pages/BeersPage'
 import Checkout from '@/pages/CheckoutPage'
 import Beer from '@/pages/BeerPage'
 
-const List = () => import('@/components/List')
+const Friends = () => import('@/pages/FriendsPage')
+
 Vue.use(Router)
 
 export default new Router({
@@ -24,6 +25,16 @@ export default new Router({
       path: '/checkout',
       name: 'Checkout',
       component: Checkout
+    },
+    {
+      path: '/friends',
+      name: 'Friends',
+      component: Friends
+    },
+    {
+      path: '/friends/all',
+      name: 'AllFriends',
+      component: Friends
     }
   ]
 })
