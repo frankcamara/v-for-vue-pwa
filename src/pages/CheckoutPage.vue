@@ -11,7 +11,6 @@
         <md-table-row>
           <md-table-head></md-table-head>
           <md-table-head>Description</md-table-head>
-          <md-table-head>Options</md-table-head>
           <md-table-head>Price</md-table-head>
         </md-table-row>
 
@@ -19,9 +18,11 @@
           <md-table-cell>
             <img :src="item.image_url" alt="item.name">
           </md-table-cell>
-          <md-table-cell>{{item.name}}</md-table-cell>
-          <md-table-cell>{{item.description}}</md-table-cell>
-          <md-table-cell>{{item.ebc}}</md-table-cell>
+          <md-table-cell>
+            <p>{{item.name}}</p>
+            <p>{{item.description}}</p>
+          </md-table-cell>
+          <md-table-cell>{{getPrice(item.ebc)}}</md-table-cell>
         </md-table-row>
       </md-table>
 
@@ -35,9 +36,9 @@
         <md-table-row>
           <md-table-cell>
             <p><h4>Total number of items: {{getItemTotal}}</h4></p>
-            <p><h3>Subtotal: {{getCartTotal}} EUR</h3></p>
+            <p><h3>Subtotal: {{getTotal()}} EUR</h3></p>
             <p><h3>VAT: 12,5%</h3></p>
-            <p><h3>Total cost: {{getTotal}}</h3></p>
+            <p><h3>Total cost: {{getTotal(true)}}</h3></p>
           </md-table-cell>
         </md-table-row>
       </md-table>
@@ -61,9 +62,16 @@ export default {
     ...mapState({
       cartItems: state => state.cart.cartItems
     }),
-    ...mapGetters(['getCartTotal', 'getItemTotal']),
-    getTotal() {
-      return this.getCartTotal * 1.125
+    ...mapGetters(['getCartTotal', 'getItemTotal'])
+  },
+  methods: {
+    getTotal(withVAT) {
+      console.log('withVAT', withVAT)
+      let tot = this.getCartTotal / 10
+      return withVAT ? tot * 1.125 : tot
+    },
+    getPrice(ebc) {
+      return `${ebc / 10 * 1.125} EUR`
     }
   }
 }

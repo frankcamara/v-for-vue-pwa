@@ -9,6 +9,7 @@
           <div class="md-title">{{beer.name}}</div>
           <div class="md-subhead">{{beer.tagline}}</div>
           <div class="md-subhead">{{getALCRate(beer.abv)}}</div>
+          <div class="md-subhead">{{getPrice(beer.ebc)}}</div>
         </md-card-header-text>
       </md-card-header>
 
@@ -42,6 +43,9 @@ export default {
   methods: {
     getALCRate(abv) {
       return `${abv}% ALC/VOL`
+    },
+    getPrice(ebc) {
+      return `${ebc / 10 * 1.125} EUR`
     },
     addToCart() {
       this.animate = !this.animate

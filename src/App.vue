@@ -63,7 +63,7 @@
             <hr>
             <md-list-item>
               <h4>Qty: {{getItemTotal}}</h4>
-              <h3>Total: {{getCartTotal}} EUR</h3>
+              <h3>Total: {{getTotal}} EUR</h3>
             </md-list-item>
             <md-list-item @click="handleCheckout" class="checkout">
               <span class="md-list-item-text">Checkout</span>
@@ -121,6 +121,9 @@ export default {
     ...mapGetters(['getCartTotal', 'getItemTotal']),
     showCart() {
       return this.$route.name === 'Beers'
+    },
+    getTotal() {
+      return this.getCartTotal / 10 * 1.125
     }
   },
   filters: {
