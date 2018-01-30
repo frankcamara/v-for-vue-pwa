@@ -8,6 +8,11 @@
         <span class="md-title">Punk Beers</span>
         <div class="md-toolbar-section-end">
           <md-button @click="toggleCart"><md-icon>shopping_cart</md-icon></md-button>
+            <div v-if="getItemTotal">
+              <md-button  class="md-fab md-mini md-fab-top-right md-fixed">
+                {{getItemTotal}}
+              </md-button>
+            </div>
         </div>
       </md-app-toolbar>
 
@@ -135,11 +140,25 @@ export default {
   }
 
   .md-content {
-    padding: 16px;
+    padding: 24px;
   }
 
   .checkout {
     background-color: #448aff;
     margin-top: 40px
   }
+  /* Override styles to create a temporary badge
+   * Badges will be implemented soon in the lib
+   * */
+  .md-fab {
+    box-shadow: none !important
+  }
+  .md-fab.md-mini {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  .md-fab.md-fab-top-right {
+    right: 32px;
+  }
+
 </style>
