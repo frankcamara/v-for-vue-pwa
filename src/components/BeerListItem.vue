@@ -1,5 +1,4 @@
 <template>
-
     <md-card style="margin: 10px">
       <md-card-header>
         <md-card-media  md-big>

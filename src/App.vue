@@ -6,7 +6,7 @@
           <md-icon>menu</md-icon>
         </md-button>
         <span class="md-title">Punk Beers</span>
-        <div class="md-toolbar-section-end">
+        <div class="md-toolbar-section-end" v-show="showCart">
           <md-button @click="toggleCart"><md-icon>shopping_cart</md-icon></md-button>
             <div v-if="getItemTotal">
               <md-button  class="md-fab md-mini md-fab-top-right md-fixed">
@@ -74,8 +74,8 @@
           <md-empty-state
             class="md-primary"
             md-icon="info"
-            md-label="Nothing in Cart"
-            md-description="Try add some beer">
+            md-label="Empty cart"
+            md-description="Hey, add some beer">
           </md-empty-state>
         </md-list-item>
         </md-list>
@@ -104,7 +104,6 @@ export default {
       this.menuVisible = !this.menuVisible
     },
     toggleCart() {
-      console.log('current cart', this.cartItems)
       this.cartVisible = !this.cartVisible
     },
     handleRemoveFromCart(id) {
@@ -119,7 +118,10 @@ export default {
     ...mapState({
       cartItems: state => state.cart.cartItems
     }),
-    ...mapGetters(['getCartTotal', 'getItemTotal'])
+    ...mapGetters(['getCartTotal', 'getItemTotal']),
+    showCart() {
+      return this.$route.name === 'Beers'
+    }
   },
   filters: {
     truncate(text, stop) {
